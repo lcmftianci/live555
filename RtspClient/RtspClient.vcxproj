@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{FB08673E-876D-4131-807B-0E0C41CE2443}</ProjectGuid>
+    <ProjectGuid>{FC8F7DB0-5663-43D2-813E-E86A7DF96D3A}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>RtspClient</RootNamespace>
+    <RootNamespace>CommonPlay</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -101,15 +101,14 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;_CRT_SECURE_NO_WARNINGS;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <SDLCheck>false</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)\liveMedia\include;$(SolutionDir)\BasicUsageEnvironment\include;$(ProjectDir)\soup;D:\commonlib\include;D:\commonlib\opencv\opencv3416\build\include;$(SolutionDir)\UsageEnvironment\include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)\liveMedia\include;$(SolutionDir)\UsageEnvironment\include;$(SolutionDir)\BasicUsageEnvironment\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(OutDir);D:\commonlib\lib;D:\commonlib\opencv\opencv3416\build\x64\vc15\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>UsageEnvironment.lib;liveMedia.lib;groupsock.lib;BasicUsageEnvironment.lib;ws2_32.lib;avcodec.lib;avutil.lib;avdevice.lib;swresample.lib;swscale.lib;avformat.lib;opencv_world3416d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OutDir)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -139,26 +138,23 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <SDLCheck>false</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)\ffmpeg\include;$(SolutionDir)\opencv\include;./soup</AdditionalIncludeDirectories>
-      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
-      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>../include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)\ffmpeg\lib;lib;$(SolutionDir)\opencv\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>$(SolutionDir)opencv\lib\*.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>../x64/Release</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="H264_2_RGB.cpp" />
-    <ClCompile Include="RtspClient.cpp" />
+    <ClCompile Include="openRTSP.cpp" />
+    <ClCompile Include="playCommon.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="H264_2_RGB.h" />
+    <ClInclude Include="playCommon.hh" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
