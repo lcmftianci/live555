@@ -1,8 +1,0 @@
-﻿DynamicRTSPServer.obj : warning LNK4075: 忽略“/EDITANDCONTINUE”(由于“/OPT:ICF”规范)
-  正在生成代码
-  134 of 2946 functions ( 4.5%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    67 functions had inline decision re-evaluated but remain unchanged
-  已完成代码的生成
-  MediaServer.vcxproj -> E:\mycode\LiveCompile\x64\Release\MediaServer.exe
-  MediaServer.vcxproj -> E:\mycode\LiveCompile\x64\Release\MediaServer.pdb (Full PDB)

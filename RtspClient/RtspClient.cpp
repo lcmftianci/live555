@@ -22,51 +22,40 @@ along with this library; if not, write to the Free Software Foundation, Inc.,
 
 #include "liveMedia.hh"
 #include "BasicUsageEnvironment.hh"
+#include "UsageEnvironment.hh"
 #include "Boolean.hh"
 
 #include "H264_2_RGB.h"
 
-#include "soapH.h"
-#include "stdsoap2.h"
-#include "soapStub.h"
-#include "base64.h"
+//#include "soapH.h"
+//#include "stdsoap2.h"
+//#include "soapStub.h"
+//#include "base64.h"
 
-/*opencvø‚*/
+#include <stdio.h>
+#include <stdlib.h>
+
 #include <opencv2\opencv.hpp>
-#include"opencv2/face.hpp"
-#include"opencv2/face/facerec.hpp"
+//#include"opencv2/face.hpp"
+//#include"opencv2/face/facerec.hpp"
 #include"opencv2/objdetect.hpp"
 #include"opencv2/core/base.hpp"
-#include"opencv2/xfeatures2d.hpp"
+//#include"opencv2/xfeatures2d.hpp"
 
-#pragma comment(lib, "UsageEnvironment.lib")
-#pragma comment(lib, "liveMedia.lib")
-#pragma comment(lib, "groupsock.lib")
-#pragma comment(lib, "BasicUsageEnvironment.lib")
-#pragma comment(lib, "ws2_32.lib")
-
-extern "C"   /*’‚¿Ô±ÿ–Î“™ π”√C∑Ω Ωµº»Î*/
-{
-#include "libavcodec/avcodec.h"
-#include "libavdevice/avdevice.h"
-#include "libavformat/avformat.h"
-#include "libavfilter/avfilter.h"
-#include "libavutil/avutil.h"
-#include "libavutil/time.h"
-#include "libswscale/swscale.h"
-#include "libavutil/pixdesc.h"
-}
 extern "C"
 {
-#pragma comment(lib, "avformat.lib")
-#pragma comment(lib, "avdevice.lib")
-#pragma comment(lib, "avcodec.lib")
-#pragma comment(lib, "avutil.lib")
-#pragma comment(lib, "avfilter.lib")
-#pragma comment(lib, "swscale.lib")
-#pragma comment(lib, "swresample.lib")
-#pragma comment(lib, "postproc.lib")
+	#include "libavcodec/avcodec.h"
+	#include "libavdevice/avdevice.h"
+	#include "libavformat/avformat.h"
+	#include "libavfilter/avfilter.h"
+	#include "libavutil/avutil.h"
+	#include "libavutil/time.h"
+	#include "libswscale/swscale.h"
+	#include "libavutil/pixdesc.h"
 }
+
+//Release
+//#pragma comment(lib, "opencv_world3416")
 
 using namespace std;
 using namespace cv;
@@ -110,6 +99,7 @@ void usage(UsageEnvironment& env, char const* progName) {
 
 char eventLoopWatchVariable = 0;
 
+#if 0
 std::string RtspGetUrl(char* code)
 {
 	struct soap soap1;
@@ -135,7 +125,7 @@ std::string RtspGetUrl(char* code)
 		unsigned char *out = (unsigned char*)malloc(strlen(str) + 1);
 		memset(out, '\0', strlen(str) + 1);
 		unsigned long outlen = 0;
-		//π˝¬ÀµÙªª––∑˚∫Õø’∏Ò
+		//ËøáÊª§ÊéâÊç¢Ë°åÁ¨¶ÂíåÁ©∫Ê†º
 
 		int i = CBase64::DecodeBase64((const unsigned char*)str, out, strlen(str) + 1);
 		//std::cout << str << std::endl;
@@ -149,6 +139,7 @@ std::string RtspGetUrl(char* code)
 	soap_done(&soap1);
 	return strOut;
 }
+#endif
 
 string trimSpace(string s)
 {
@@ -176,12 +167,6 @@ int OpenRtsp(const char* exeName, const char* rtspUtl)
 	TaskScheduler* scheduler = BasicTaskScheduler::createNew();
 	UsageEnvironment* env = BasicUsageEnvironment::createNew(*scheduler);
 	H264_Init();
-	// We need at least one "rtsp://" URL argument:
-	/*if (argc < 2) {
-		usage(*env, argv[0]);
-		return 1;
-	}*/
-
 	openURL(*env, exeName, rtspUtl);
 	env->taskScheduler().doEventLoop(&eventLoopWatchVariable);
 
@@ -194,14 +179,14 @@ int main(int argc, char** argv) {
 
 	if (argc > 1)
 	{
-		while (1)
-		{
-			OpenRtsp(argv[0], argv[1]);
-		}
+		OpenRtsp(argv[0], argv[1]);
+	}
+	else {
+		OpenRtsp(argv[1], "rtsp://127.0.0.1/Titanic.mkv");
 	}
 	// There are argc-1 URLs: argv[1] through argv[argc-1].  Open and start streaming each one:
 	//for (int i = 1; i <= argc - 1; ++i) {
-	//	//Õ®π˝urlcodeªÒ»°rtspµÿ÷∑
+	//	//ÈÄöËøáurlcodeËé∑ÂèñrtspÂú∞ÂùÄ
 	//	//string strUrl = RtspGetUrl(argv[1]);
 	//	//openURL(*env, argv[0], strUrl.c_str());
 	//	openURL(*env, argv[0], argv[1]);
@@ -216,10 +201,6 @@ int main(int argc, char** argv) {
 	// If you choose to continue the application past this point (i.e., if you comment out the "return 0;" statement above),
 	// and if you don't intend to do anything more with the "TaskScheduler" and "UsageEnvironment" objects,
 	// then you can also reclaim the (small) memory used by these objects by uncommenting the following code:
-	/*
-	env->reclaim(); env = NULL;
-	delete scheduler; scheduler = NULL;
-	*/
 }
 
 // Define a class to hold per-stream state that we maintain throughout each stream's lifetime:
@@ -685,8 +666,7 @@ void DummySink::afterGettingFrame(void* clientData, unsigned frameSize, unsigned
 FILE *fp = NULL;
 int nSize = 0;
 
-void DummySink::afterGettingFrame(unsigned frameSize, unsigned numTruncatedBytes,
-	struct timeval presentationTime, unsigned /*durationInMicroseconds*/) {
+void DummySink::afterGettingFrame(unsigned frameSize, unsigned numTruncatedBytes,	struct timeval presentationTime, unsigned durationInMicroseconds) {
 	// We've just received a frame of data.  (Optionally) print out information about it:
 #ifdef DEBUG_PRINT_EACH_RECEIVED_FRAME
 	if (fStreamId != NULL) envir() << "Stream \"" << fStreamId << "\"; ";
@@ -708,23 +688,23 @@ void DummySink::afterGettingFrame(unsigned frameSize, unsigned numTruncatedBytes
 	// Then continue, to request the next frame of data:
 	nSize = frameSize;
 	cout << "guck -------------------------------====================================------------------------" << nSize << endl;
+#if 0
 	if (fp == NULL)
 		fp = fopen("1.h264", "wb");
-
+#endif
 	//fwrite(fReceiveBuffer, 1, nSize, fp);
-	/*cout << "/////////////////////////////////////////"<< fReceiveBuffer << endl;*/
 	//printf("%s", fReceiveBuffer);
-	unsigned char* RgbBuf;
+	unsigned char* RgbBuf = NULL;
 	unsigned int RgbSize = 0;
 	int RgbWidth = 0;
 	int RgbHeight = 0;
-
-	if (fp != NULL)
+#if 0
+	if(fp != NULL)
 	{
 		fwrite(fReceiveBuffer, frameSize, 1, fp);
 		fflush(fp);
 	}
-
+#endif
 #if 1
 	memset(decBuffer, 0, DUMMY_SINK_RECEIVE_BUFFER_SIZE);
 	int nTotalLen = 0;
@@ -734,23 +714,21 @@ void DummySink::afterGettingFrame(unsigned frameSize, unsigned numTruncatedBytes
 
 			if (firstFrame)
 			{
-				/*for (unsigned j = 0; j < 3; ++j)
-				{*/
-					unsigned numSPropRecords;
-					//if (j == 0)
-					//if (fReceiveBuffer[0] == 0x65 || fReceiveBuffer[0] == 0x25 || fReceiveBuffer[0] == 0x68 || fReceiveBuffer[0] == 0x67)
+				unsigned numSPropRecords;
+				//if (j == 0)
+				//if (fReceiveBuffer[0] == 0x65 || fReceiveBuffer[0] == 0x25 || fReceiveBuffer[0] == 0x68 || fReceiveBuffer[0] == 0x67)
+				{
+					SPropRecord* sPropRecords = parseSPropParameterSets(fSubsession.fmtp_spropparametersets(), numSPropRecords);
+					for (unsigned i = 0; i < numSPropRecords; ++i)
 					{
-						SPropRecord* sPropRecords = parseSPropParameterSets(fSubsession.fmtp_spropparametersets(), numSPropRecords);
-						for (unsigned i = 0; i < numSPropRecords; ++i)
-						{
-							memcpy(decBuffer + nTotalLen, start_code, 4);
-							nTotalLen += 4;
-							memcpy(decBuffer + nTotalLen, sPropRecords[i].sPropBytes, sPropRecords[i].sPropLength);
-							nTotalLen += sPropRecords[i].sPropLength;
-							printf("mvp------XXXXXXXXXXXXXXXXXXXXXXXXXXX---------------%d\n", sPropRecords[i].sPropLength);
-						}
-						delete[] sPropRecords;
+						memcpy(decBuffer + nTotalLen, start_code, 4);
+						nTotalLen += 4;
+						memcpy(decBuffer + nTotalLen, sPropRecords[i].sPropBytes, sPropRecords[i].sPropLength);
+						nTotalLen += sPropRecords[i].sPropLength;
+						printf("==>%d\n", sPropRecords[i].sPropLength);
 					}
+					delete[] sPropRecords;
+				}
 			}
 			memcpy(decBuffer + nTotalLen, start_code, 4);
 			nTotalLen += 4;
@@ -792,7 +770,7 @@ void DummySink::afterGettingFrame(unsigned frameSize, unsigned numTruncatedBytes
 #endif
 
 	//QByteArray frameBuffer((char*)fReceiveBuffer, frameSize);
-	////≤Â»ÎSPS PPS≤≈ƒ‹»√H264Ω‚¬Î∆˜’˝»∑Ω‚¬Î
+	////ÊèíÂÖ•SPS PPSÊâçËÉΩËÆ©H264Ëß£Á†ÅÂô®Ê≠£Á°ÆËß£Á†Å
 	//QByteArray sps = sprop_parameter_sets;
 	//QByteArray extraData;
 	//QList<QByteArray> recodList = sps.split(',');

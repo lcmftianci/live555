@@ -1,8 +1,8 @@
 #pragma once
 
-#include "BasicUsageEnvironment\BasicUsageEnvironment.hh"
-#include "groupsock\GroupsockHelper.hh"
-#include "liveMedia\liveMedia.hh"
+#include "BasicUsageEnvironment.hh"
+#include "GroupsockHelper.hh"
+#include "liveMedia.hh"
 #include <iostream>
 #include <list>
 #include <map>

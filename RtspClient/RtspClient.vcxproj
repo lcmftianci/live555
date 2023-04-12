@@ -22,32 +22,32 @@
     <ProjectGuid>{FB08673E-876D-4131-807B-0E0C41CE2443}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>RtspClient</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.10586.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -101,12 +101,15 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CRT_SECURE_NO_WARNINGS;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>false</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)\liveMedia\include;$(SolutionDir)\BasicUsageEnvironment\include;$(ProjectDir)\soup;D:\commonlib\include;D:\commonlib\opencv\opencv3416\build\include;$(SolutionDir)\UsageEnvironment\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(OutDir);D:\commonlib\lib;D:\commonlib\opencv\opencv3416\build\x64\vc15\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>UsageEnvironment.lib;liveMedia.lib;groupsock.lib;BasicUsageEnvironment.lib;ws2_32.lib;avcodec.lib;avutil.lib;avdevice.lib;swresample.lib;swscale.lib;avformat.lib;opencv_world3416d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -153,189 +156,9 @@
   <ItemGroup>
     <ClCompile Include="H264_2_RGB.cpp" />
     <ClCompile Include="RtspClient.cpp" />
-    <ClCompile Include="soup\base64.cpp" />
-    <ClCompile Include="soup\soapC.cpp" />
-    <ClCompile Include="soup\soapClient.cpp" />
-    <ClCompile Include="soup\stdsoap2.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AC3AudioFileServerMediaSubsession.hh" />
-    <ClInclude Include="AC3AudioRTPSink.hh" />
-    <ClInclude Include="AC3AudioRTPSource.hh" />
-    <ClInclude Include="AC3AudioStreamFramer.hh" />
-    <ClInclude Include="ADTSAudioFileServerMediaSubsession.hh" />
-    <ClInclude Include="ADTSAudioFileSource.hh" />
-    <ClInclude Include="AMRAudioFileServerMediaSubsession.hh" />
-    <ClInclude Include="AMRAudioFileSink.hh" />
-    <ClInclude Include="AMRAudioFileSource.hh" />
-    <ClInclude Include="AMRAudioRTPSink.hh" />
-    <ClInclude Include="AMRAudioRTPSource.hh" />
-    <ClInclude Include="AMRAudioSource.hh" />
-    <ClInclude Include="AudioInputDevice.hh" />
-    <ClInclude Include="AudioRTPSink.hh" />
-    <ClInclude Include="AVIFileSink.hh" />
-    <ClInclude Include="Base64.hh" />
-    <ClInclude Include="BasicUDPSink.hh" />
-    <ClInclude Include="BasicUDPSource.hh" />
-    <ClInclude Include="BasicUsageEnvironment.hh" />
-    <ClInclude Include="BasicUsageEnvironment0.hh" />
-    <ClInclude Include="BasicUsageEnvironment_version.hh" />
-    <ClInclude Include="BitVector.hh" />
-    <ClInclude Include="Boolean.hh" />
-    <ClInclude Include="ByteStreamFileSource.hh" />
-    <ClInclude Include="ByteStreamMemoryBufferSource.hh" />
-    <ClInclude Include="ByteStreamMultiFileSource.hh" />
-    <ClInclude Include="DelayQueue.hh" />
-    <ClInclude Include="DeviceSource.hh" />
-    <ClInclude Include="DigestAuthentication.hh" />
-    <ClInclude Include="DVVideoFileServerMediaSubsession.hh" />
-    <ClInclude Include="DVVideoRTPSink.hh" />
-    <ClInclude Include="DVVideoRTPSource.hh" />
-    <ClInclude Include="DVVideoStreamFramer.hh" />
-    <ClInclude Include="FileServerMediaSubsession.hh" />
-    <ClInclude Include="FileSink.hh" />
-    <ClInclude Include="FramedFileSource.hh" />
-    <ClInclude Include="FramedFilter.hh" />
-    <ClInclude Include="FramedSource.hh" />
-    <ClInclude Include="GenericMediaServer.hh" />
-    <ClInclude Include="GroupEId.hh" />
-    <ClInclude Include="Groupsock.hh" />
-    <ClInclude Include="GroupsockHelper.hh" />
-    <ClInclude Include="groupsock_version.hh" />
-    <ClInclude Include="GSMAudioRTPSink.hh" />
-    <ClInclude Include="H261VideoRTPSource.hh" />
-    <ClInclude Include="H263plusVideoFileServerMediaSubsession.hh" />
-    <ClInclude Include="H263plusVideoRTPSink.hh" />
-    <ClInclude Include="H263plusVideoRTPSource.hh" />
-    <ClInclude Include="H263plusVideoStreamFramer.hh" />
-    <ClInclude Include="H264or5VideoFileSink.hh" />
-    <ClInclude Include="H264or5VideoRTPSink.hh" />
-    <ClInclude Include="H264or5VideoStreamDiscreteFramer.hh" />
-    <ClInclude Include="H264or5VideoStreamFramer.hh" />
-    <ClInclude Include="H264VideoFileServerMediaSubsession.hh" />
-    <ClInclude Include="H264VideoFileSink.hh" />
-    <ClInclude Include="H264VideoRTPSink.hh" />
-    <ClInclude Include="H264VideoRTPSource.hh" />
-    <ClInclude Include="H264VideoStreamDiscreteFramer.hh" />
-    <ClInclude Include="H264VideoStreamFramer.hh" />
     <ClInclude Include="H264_2_RGB.h" />
-    <ClInclude Include="H265VideoFileServerMediaSubsession.hh" />
-    <ClInclude Include="H265VideoFileSink.hh" />
-    <ClInclude Include="H265VideoRTPSink.hh" />
-    <ClInclude Include="H265VideoRTPSource.hh" />
-    <ClInclude Include="H265VideoStreamDiscreteFramer.hh" />
-    <ClInclude Include="H265VideoStreamFramer.hh" />
-    <ClInclude Include="HashTable.hh" />
-    <ClInclude Include="InputFile.hh" />
-    <ClInclude Include="JPEGVideoRTPSink.hh" />
-    <ClInclude Include="JPEGVideoRTPSource.hh" />
-    <ClInclude Include="JPEGVideoSource.hh" />
-    <ClInclude Include="liveMedia.hh" />
-    <ClInclude Include="liveMedia_version.hh" />
-    <ClInclude Include="Locale.hh" />
-    <ClInclude Include="MatroskaFile.hh" />
-    <ClInclude Include="MatroskaFileServerDemux.hh" />
-    <ClInclude Include="Media.hh" />
-    <ClInclude Include="MediaSession.hh" />
-    <ClInclude Include="MediaSink.hh" />
-    <ClInclude Include="MediaSource.hh" />
-    <ClInclude Include="MediaTranscodingTable.hh" />
-    <ClInclude Include="MP3ADU.hh" />
-    <ClInclude Include="MP3ADUinterleaving.hh" />
-    <ClInclude Include="MP3ADURTPSink.hh" />
-    <ClInclude Include="MP3ADURTPSource.hh" />
-    <ClInclude Include="MP3ADUTranscoder.hh" />
-    <ClInclude Include="MP3AudioFileServerMediaSubsession.hh" />
-    <ClInclude Include="MP3FileSource.hh" />
-    <ClInclude Include="MP3Transcoder.hh" />
-    <ClInclude Include="MPEG1or2AudioRTPSink.hh" />
-    <ClInclude Include="MPEG1or2AudioRTPSource.hh" />
-    <ClInclude Include="MPEG1or2AudioStreamFramer.hh" />
-    <ClInclude Include="MPEG1or2Demux.hh" />
-    <ClInclude Include="MPEG1or2DemuxedElementaryStream.hh" />
-    <ClInclude Include="MPEG1or2DemuxedServerMediaSubsession.hh" />
-    <ClInclude Include="MPEG1or2FileServerDemux.hh" />
-    <ClInclude Include="MPEG1or2VideoFileServerMediaSubsession.hh" />
-    <ClInclude Include="MPEG1or2VideoRTPSink.hh" />
-    <ClInclude Include="MPEG1or2VideoRTPSource.hh" />
-    <ClInclude Include="MPEG1or2VideoStreamDiscreteFramer.hh" />
-    <ClInclude Include="MPEG1or2VideoStreamFramer.hh" />
-    <ClInclude Include="MPEG2IndexFromTransportStream.hh" />
-    <ClInclude Include="MPEG2TransportFileServerMediaSubsession.hh" />
-    <ClInclude Include="MPEG2TransportStreamAccumulator.hh" />
-    <ClInclude Include="MPEG2TransportStreamFramer.hh" />
-    <ClInclude Include="MPEG2TransportStreamFromESSource.hh" />
-    <ClInclude Include="MPEG2TransportStreamFromPESSource.hh" />
-    <ClInclude Include="MPEG2TransportStreamIndexFile.hh" />
-    <ClInclude Include="MPEG2TransportStreamMultiplexor.hh" />
-    <ClInclude Include="MPEG2TransportStreamTrickModeFilter.hh" />
-    <ClInclude Include="MPEG2TransportUDPServerMediaSubsession.hh" />
-    <ClInclude Include="MPEG4ESVideoRTPSink.hh" />
-    <ClInclude Include="MPEG4ESVideoRTPSource.hh" />
-    <ClInclude Include="MPEG4GenericRTPSink.hh" />
-    <ClInclude Include="MPEG4GenericRTPSource.hh" />
-    <ClInclude Include="MPEG4LATMAudioRTPSink.hh" />
-    <ClInclude Include="MPEG4LATMAudioRTPSource.hh" />
-    <ClInclude Include="MPEG4VideoFileServerMediaSubsession.hh" />
-    <ClInclude Include="MPEG4VideoStreamDiscreteFramer.hh" />
-    <ClInclude Include="MPEG4VideoStreamFramer.hh" />
-    <ClInclude Include="MPEGVideoStreamFramer.hh" />
-    <ClInclude Include="MultiFramedRTPSink.hh" />
-    <ClInclude Include="MultiFramedRTPSource.hh" />
-    <ClInclude Include="NetAddress.hh" />
-    <ClInclude Include="NetCommon.h" />
-    <ClInclude Include="NetInterface.hh" />
-    <ClInclude Include="OggFile.hh" />
-    <ClInclude Include="OggFileServerDemux.hh" />
-    <ClInclude Include="OggFileSink.hh" />
-    <ClInclude Include="OnDemandServerMediaSubsession.hh" />
-    <ClInclude Include="ourMD5.hh" />
-    <ClInclude Include="OutputFile.hh" />
-    <ClInclude Include="PassiveServerMediaSubsession.hh" />
-    <ClInclude Include="ProxyServerMediaSession.hh" />
-    <ClInclude Include="QCELPAudioRTPSource.hh" />
-    <ClInclude Include="QuickTimeFileSink.hh" />
-    <ClInclude Include="QuickTimeGenericRTPSource.hh" />
-    <ClInclude Include="RTCP.hh" />
-    <ClInclude Include="RTPInterface.hh" />
-    <ClInclude Include="RTPSink.hh" />
-    <ClInclude Include="RTPSource.hh" />
-    <ClInclude Include="RTSPClient.hh" />
-    <ClInclude Include="RTSPCommon.hh" />
-    <ClInclude Include="RTSPRegisterSender.hh" />
-    <ClInclude Include="RTSPServer.hh" />
-    <ClInclude Include="RTSPServerSupportingHTTPStreaming.hh" />
-    <ClInclude Include="ServerMediaSession.hh" />
-    <ClInclude Include="SimpleRTPSink.hh" />
-    <ClInclude Include="SimpleRTPSource.hh" />
-    <ClInclude Include="SIPClient.hh" />
-    <ClInclude Include="soup\base64.h" />
-    <ClInclude Include="soup\soapH.h" />
-    <ClInclude Include="soup\soapStub.h" />
-    <ClInclude Include="soup\stdsoap2.h" />
-    <ClInclude Include="strDup.hh" />
-    <ClInclude Include="StreamReplicator.hh" />
-    <ClInclude Include="T140TextRTPSink.hh" />
-    <ClInclude Include="TCPStreamSink.hh" />
-    <ClInclude Include="TextRTPSink.hh" />
-    <ClInclude Include="TheoraVideoRTPSink.hh" />
-    <ClInclude Include="TheoraVideoRTPSource.hh" />
-    <ClInclude Include="uLawAudioFilter.hh" />
-    <ClInclude Include="UsageEnvironment.hh" />
-    <ClInclude Include="UsageEnvironment_version.hh" />
-    <ClInclude Include="version.hh" />
-    <ClInclude Include="VideoRTPSink.hh" />
-    <ClInclude Include="VorbisAudioRTPSink.hh" />
-    <ClInclude Include="VorbisAudioRTPSource.hh" />
-    <ClInclude Include="VP8VideoRTPSink.hh" />
-    <ClInclude Include="VP8VideoRTPSource.hh" />
-    <ClInclude Include="VP9VideoRTPSink.hh" />
-    <ClInclude Include="VP9VideoRTPSource.hh" />
-    <ClInclude Include="WAVAudioFileServerMediaSubsession.hh" />
-    <ClInclude Include="WAVAudioFileSource.hh" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ProxyServerMediaSession.hh.orig" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

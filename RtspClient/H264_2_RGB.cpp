@@ -15,9 +15,9 @@ AVFrame         *pFrame = NULL;
 AVFrame         *pFrameRGB = NULL;
 AVPacket		pkt;
 
-FILE * fw;
+FILE			*fw = NULL;
 
-//初始化ffmpeg相关组件
+//鍒濆鍖杅fmpeg鐩稿叧缁勪欢
 int H264_Init(void)
 {
 	avcodec_register_all();
@@ -38,16 +38,16 @@ int H264_Init(void)
 
 	if (avcodec_open2(pCodecCtx, pCodec, NULL) < 0)
 		return -1;
-
+#if 0
 	if (fw == NULL)
 		fw = fopen("a.mp4", "wb");
-
+#endif
 	return 0;
 }
 
 int g_init = 0;
 
-//转码函数
+//杞爜鍑芥暟
 int H264_2_RGB(unsigned char *inputbuf, int frame_size, unsigned char *outputbuf, unsigned int*outsize, int *nWidth, int *nHeight)
 {
 	int             av_result = 0;
@@ -113,10 +113,12 @@ void H264_Release(void)
 	//av_free(pCodecCtx);
 	//av_free(pFrame);
 	//av_free(pFrameRGB);
+#if 0
 	if (fw != NULL)
 	{
 		fclose(fw);
 		fw = NULL;
 	}
+#endif
 	//av_free(pkt);
 }
