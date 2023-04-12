@@ -1,7 +1,7 @@
 # live555 使用live555实现的rtsp server与 rtsp client
 live555 库编译, 库封装，打开rtsp视频流
 
-# 使用方式
+## 使用方式
 * 配置ffmpeg路径和opencv路径 分别用于解码和播放视频
     打开Live555.sln 配置库路径
     编译RtspServer，然后将Titanic.mkv拷贝到RtspServer.exe执行程序目录下启动RtspServer.exe
@@ -14,4 +14,10 @@ live555 库编译, 库封装，打开rtsp视频流
 ```
     cd x64\Debug
     RtspClient rtsp://127.0.0.1/Titanic.mkv
+```
+
+## cmake编译方式 
+```
+    cmake -Bbuild_ninja .
+    cmake --build build_ninja
 ```
