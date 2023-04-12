@@ -1,4 +1,4 @@
-#include "YHMediaClient.h"
+#include "CYHMediaClient.h"
 #include "WinCriticalSection.h"
 #include "MetMediaSink.h"
 								 //#include "YHWMPlayDemoDlg.h"
