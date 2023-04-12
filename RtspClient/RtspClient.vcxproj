@@ -109,6 +109,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(OutDir);D:\commonlib\lib;D:\commonlib\opencv\opencv3416\build\x64\vc15\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>UsageEnvironment.lib;liveMedia.lib;groupsock.lib;BasicUsageEnvironment.lib;ws2_32.lib;avcodec.lib;avutil.lib;avdevice.lib;swresample.lib;swscale.lib;avformat.lib;opencv_world3416d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -155,17 +156,9 @@
   <ItemGroup>
     <ClCompile Include="H264_2_RGB.cpp" />
     <ClCompile Include="RtspClient.cpp" />
-    <ClCompile Include="soup\base64.cpp" />
-    <ClCompile Include="soup\soapC.cpp" />
-    <ClCompile Include="soup\soapClient.cpp" />
-    <ClCompile Include="soup\stdsoap2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="H264_2_RGB.h" />
-    <ClInclude Include="soup\base64.h" />
-    <ClInclude Include="soup\soapH.h" />
-    <ClInclude Include="soup\soapStub.h" />
-    <ClInclude Include="soup\stdsoap2.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

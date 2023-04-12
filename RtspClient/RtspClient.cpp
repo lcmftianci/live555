@@ -27,10 +27,10 @@ along with this library; if not, write to the Free Software Foundation, Inc.,
 
 #include "H264_2_RGB.h"
 
-#include "soapH.h"
-#include "stdsoap2.h"
-#include "soapStub.h"
-#include "base64.h"
+//#include "soapH.h"
+//#include "stdsoap2.h"
+//#include "soapStub.h"
+//#include "base64.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -41,12 +41,6 @@ along with this library; if not, write to the Free Software Foundation, Inc.,
 #include"opencv2/objdetect.hpp"
 #include"opencv2/core/base.hpp"
 //#include"opencv2/xfeatures2d.hpp"
-
-#pragma comment(lib, "UsageEnvironment.lib")
-#pragma comment(lib, "liveMedia.lib")
-#pragma comment(lib, "groupsock.lib")
-#pragma comment(lib, "BasicUsageEnvironment.lib")
-#pragma comment(lib, "ws2_32.lib")
 
 extern "C"
 {
@@ -60,17 +54,6 @@ extern "C"
 	#include "libavutil/pixdesc.h"
 }
 
-#pragma comment(lib, "avformat.lib")
-#pragma comment(lib, "avdevice.lib")
-#pragma comment(lib, "avcodec.lib")
-#pragma comment(lib, "avutil.lib")
-#pragma comment(lib, "avfilter.lib")
-#pragma comment(lib, "swscale.lib")
-#pragma comment(lib, "swresample.lib")
-#pragma comment(lib, "postproc.lib")
-
-//Debug
-#pragma comment(lib, "opencv_world3416d")
 //Release
 //#pragma comment(lib, "opencv_world3416")
 
@@ -116,6 +99,7 @@ void usage(UsageEnvironment& env, char const* progName) {
 
 char eventLoopWatchVariable = 0;
 
+#if 0
 std::string RtspGetUrl(char* code)
 {
 	struct soap soap1;
@@ -155,6 +139,7 @@ std::string RtspGetUrl(char* code)
 	soap_done(&soap1);
 	return strOut;
 }
+#endif
 
 string trimSpace(string s)
 {
@@ -194,10 +179,10 @@ int main(int argc, char** argv) {
 
 	if (argc > 1)
 	{
-		while (1)
-		{
-			OpenRtsp(argv[0], argv[1]);
-		}
+		OpenRtsp(argv[0], argv[1]);
+	}
+	else {
+		OpenRtsp(argv[1], "rtsp://127.0.0.1/Titanic.mkv");
 	}
 	// There are argc-1 URLs: argv[1] through argv[argc-1].  Open and start streaming each one:
 	//for (int i = 1; i <= argc - 1; ++i) {
@@ -703,22 +688,23 @@ void DummySink::afterGettingFrame(unsigned frameSize, unsigned numTruncatedBytes
 	// Then continue, to request the next frame of data:
 	nSize = frameSize;
 	cout << "guck -------------------------------====================================------------------------" << nSize << endl;
+#if 0
 	if (fp == NULL)
 		fp = fopen("1.h264", "wb");
-
+#endif
 	//fwrite(fReceiveBuffer, 1, nSize, fp);
 	//printf("%s", fReceiveBuffer);
-	unsigned char* RgbBuf;
+	unsigned char* RgbBuf = NULL;
 	unsigned int RgbSize = 0;
 	int RgbWidth = 0;
 	int RgbHeight = 0;
-
+#if 0
 	if(fp != NULL)
 	{
 		fwrite(fReceiveBuffer, frameSize, 1, fp);
 		fflush(fp);
 	}
-
+#endif
 #if 1
 	memset(decBuffer, 0, DUMMY_SINK_RECEIVE_BUFFER_SIZE);
 	int nTotalLen = 0;

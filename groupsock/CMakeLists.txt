@@ -4,6 +4,7 @@ project(groupsock)
 
 file(GLOB groupdock_src
     "*.cpp"
+    "*.c"
     "include/*.h"
     "include/*.hh"
 )
