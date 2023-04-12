@@ -10,7 +10,7 @@ live555 库编译, 库封装，打开rtsp视频流
     RtspServer
 ```
 
-* 编译RtspClient,运行,只接受流
+* 编译RtspClient,运行,只接收流
 ```
     cd x64\Debug
     RtspClient rtsp://127.0.0.1/Titanic.mkv

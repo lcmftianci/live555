@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{FB08673E-876D-4131-807B-0E0C41CE2443}</ProjectGuid>
+    <ProjectGuid>{FC8F7DB0-5663-43D2-813E-E86A7DF96D3A}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>RtspPlayer</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
