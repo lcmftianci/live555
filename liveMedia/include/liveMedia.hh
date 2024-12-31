@@ -126,5 +126,6 @@ along with this library; if not, write to the Free Software Foundation, Inc.,
 #include "MatroskaFileServerDemux.hh"
 #include "OggFileServerDemux.hh"
 #include "ProxyServerMediaSession.hh"
+// #include "CameraServerMediaSubsession.hh"
 
 #endif

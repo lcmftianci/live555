@@ -92,17 +92,23 @@ ServerMediaSession::~ServerMediaSession() {
 
 Boolean
 ServerMediaSession::addSubsession(ServerMediaSubsession* subsession) {
+  printf("ServerMediaSession::addSubsession()\n");
   if (subsession->fParentSession != NULL) return False; // it's already used
-
+  printf("ServerMediaSession::addSubsession() - done\n");
   if (fSubsessionsTail == NULL) {
+    printf("ServerMediaSession::addSubsession() - Head == NULL\n");
     fSubsessionsHead = subsession;
+    printf("ServerMediaSession::addSubsession() - Tail == NULL done\n");
   } else {
     fSubsessionsTail->fNext = subsession;
+    printf("ServerMediaSession::addSubsession() - Tail != NULL\n");
   }
   fSubsessionsTail = subsession;
+  printf("ServerMediaSession::addSubsession() - done\n");
 
   subsession->fParentSession = this;
   subsession->fTrackNumber = ++fSubsessionCounter;
+  printf("Added subsession %d to \"%s\"\n", subsession->fTrackNumber, fStreamName);
   return True;
 }
 

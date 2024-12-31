@@ -40,6 +40,7 @@ OnDemandServerMediaSubsession
   }
   gethostname(fCNAME, sizeof fCNAME);
   fCNAME[sizeof fCNAME-1] = '\0'; // just in case
+  printf("CNAME: %s\n", fCNAME);
 }
 
 OnDemandServerMediaSubsession::~OnDemandServerMediaSubsession() {
